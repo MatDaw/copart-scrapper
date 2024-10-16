@@ -11,13 +11,13 @@ async function run(url, DOMPath, lastPage) {
   const browser = await puppeteer.launch()
   const page = await browser.newPage()
 
-  // Функция для входа в аккаунт
+  // Function for logging into the account
   await login(page)
-  // После входа переходим на страницу каталоога, заданную ранее
+  // After logging in, we go to the catalogue page specified earlier
   await page.goto(url, { waitUntil: 'networkidle2' })
-  //Парсим
+  // Parse
   await parse(DOMPath, browser, page, lastPage)
-  // Закрытие браузера при завершении
+  // Closing the browser on completion
   await browser.close()
 }
 
@@ -58,7 +58,7 @@ async function parse(DOMPath, browser, page, lastPage) {
 
   await orderedPageLoad(urls, browser)
 
-  // Замыкание функции
+  // Function closure
   console.log('click to next page!')
   await Promise.all([
     page.click('.paginate_button.next a'),
